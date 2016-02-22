@@ -1,13 +1,1 @@
 testing
-
-After making changes to the ButtonMashStudios folder, open GitHub
-desktop and click "ButtonMashStudios" in the left Dashboard.
-
-Changes should automatically be populated. Click the text boxes on the
-bottom of the window. Give a name and summary of what your changes were.
-You won't be able to click "Commit to master" without a title.
-
-Click Commit to Master and then press Sync in the top right of the
-window for good measure.
-
-You can look at the changes made during each individual's commits using the circles in the top right.
