@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Vector3 move = Vector3.up;
+        Vector3 move = transform.up;
         move *= Time.deltaTime * speed;
         transform.Translate(move, Space.World);
 	}

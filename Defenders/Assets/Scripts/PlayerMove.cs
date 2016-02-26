@@ -6,8 +6,9 @@ public class PlayerMove : MonoBehaviour {
     public float speed;
     //Where are we facing?
 
+    private Transform child;
 	void Start () {
-
+        child = transform.GetChild(0);
 	}
 	
 	void FixedUpdate () {
@@ -22,9 +23,11 @@ public class PlayerMove : MonoBehaviour {
         Vector3 moving = new Vector3(side, up, 0f);                                     //set up V3 based on inputs
         float angle = Mathf.Atan2(side, up) * Mathf.Rad2Deg;                            //create a float, set equal to the Atan2 of side and up
 
-        if (side != 0 || up != 0)                                                        //stops it from resetting if x or y are zero
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.back);             //change the objects rotation based on a Quaternion
-                                                                                        //using our angle and a vector3                                                                  //if our bool in editor is true, move this way
+        if (moving != Vector3.zero) {
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.back);
+            child.rotation = Quaternion.AngleAxis(angle, Vector3.back);
+        }
+
         transform.Translate(moving * speed * Time.deltaTime,Space.World);
     }
 }
