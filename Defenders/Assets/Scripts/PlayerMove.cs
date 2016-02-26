@@ -2,15 +2,14 @@
 using System.Collections;
 
 public class PlayerMove : MonoBehaviour {
-
+    //How fast are we
     public float speed;
+    //Where are we facing?
 
-	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
-	// Update is called once per frame
 	void FixedUpdate () {
         move();
     }
@@ -26,6 +25,6 @@ public class PlayerMove : MonoBehaviour {
         if (side != 0 || up != 0)                                                        //stops it from resetting if x or y are zero
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.back);             //change the objects rotation based on a Quaternion
                                                                                         //using our angle and a vector3                                                                  //if our bool in editor is true, move this way
-        transform.Translate(moving * speed * Time.deltaTime, Space.World);
+        transform.Translate(moving * speed * Time.deltaTime,Space.World);
     }
 }

@@ -1,11 +1,11 @@
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{406035C4-D1A9-6CE6-A5AB-4CD321EA71A6}") = "HumanPickup", "Assembly-CSharp-firstpass.csproj", "{DEF60452-7AC8-843C-81E9-1A3D5A08BF54}"
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanPickup.CSharp.Plugins", "HumanPickup.CSharp.Plugins.csproj", "{6A27F112-A882-0A8E-0D11-CF161EA077C0}"
 EndProject
-Project("{406035C4-D1A9-6CE6-A5AB-4CD321EA71A6}") = "HumanPickup", "Assembly-CSharp.csproj", "{0277AE00-E0EE-31D1-2D34-013E61930DE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanPickup.CSharp", "HumanPickup.CSharp.csproj", "{F4B53D7B-CE4F-716C-F802-0F948F791DEC}"
 EndProject
-Project("{406035C4-D1A9-6CE6-A5AB-4CD321EA71A6}") = "HumanPickup", "Assembly-CSharp-Editor.csproj", "{CD431F71-C7D6-32EF-3DD3-F56BA585CCB3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanPickup.CSharp.Editor", "HumanPickup.CSharp.Editor.csproj", "{076D5886-B4D0-7991-0D52-FF64F8897E87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,40 +13,20 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DEF60452-7AC8-843C-81E9-1A3D5A08BF54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DEF60452-7AC8-843C-81E9-1A3D5A08BF54}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DEF60452-7AC8-843C-81E9-1A3D5A08BF54}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DEF60452-7AC8-843C-81E9-1A3D5A08BF54}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0277AE00-E0EE-31D1-2D34-013E61930DE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0277AE00-E0EE-31D1-2D34-013E61930DE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0277AE00-E0EE-31D1-2D34-013E61930DE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0277AE00-E0EE-31D1-2D34-013E61930DE1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CD431F71-C7D6-32EF-3DD3-F56BA585CCB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD431F71-C7D6-32EF-3DD3-F56BA585CCB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD431F71-C7D6-32EF-3DD3-F56BA585CCB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD431F71-C7D6-32EF-3DD3-F56BA585CCB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A27F112-A882-0A8E-0D11-CF161EA077C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A27F112-A882-0A8E-0D11-CF161EA077C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A27F112-A882-0A8E-0D11-CF161EA077C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A27F112-A882-0A8E-0D11-CF161EA077C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4B53D7B-CE4F-716C-F802-0F948F791DEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4B53D7B-CE4F-716C-F802-0F948F791DEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4B53D7B-CE4F-716C-F802-0F948F791DEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4B53D7B-CE4F-716C-F802-0F948F791DEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{076D5886-B4D0-7991-0D52-FF64F8897E87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{076D5886-B4D0-7991-0D52-FF64F8897E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{076D5886-B4D0-7991-0D52-FF64F8897E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{076D5886-B4D0-7991-0D52-FF64F8897E87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-										GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Assembly-CSharp.csproj
-		Policies = $0
-		$0.TextStylePolicy = $1
-		$1.inheritsSet = null
-		$1.scope = text/x-csharp
-		$0.CSharpFormattingPolicy = $2
-		$2.inheritsSet = Mono
-		$2.inheritsScope = text/x-csharp
-		$2.scope = text/x-csharp
-		$0.TextStylePolicy = $3
-		$3.FileWidth = 120
-		$3.TabWidth = 4
-		$3.IndentWidth = 4
-		$3.EolMarker = Unix
-		$3.inheritsSet = Mono
-		$3.inheritsScope = text/plain
-		$3.scope = text/plain
-	EndGlobalSection
-
 EndGlobal
