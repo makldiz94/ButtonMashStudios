@@ -30,4 +30,12 @@ public class PlayerMove : MonoBehaviour {
 
         transform.Translate(moving * speed * Time.deltaTime,Space.World);
     }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Planet")
+        {
+            Debug.Log("You hit planet " + col.gameObject.name);
+        }
+    }
 }
