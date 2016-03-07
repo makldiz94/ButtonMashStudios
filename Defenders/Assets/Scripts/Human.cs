@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
-public class PickUpHuman1 : MonoBehaviour {
+public class Human : MonoBehaviour {
 	public Text humanText;
 	public int totalHumans1 = 0;
 	public int totalHumans2 = 0;
