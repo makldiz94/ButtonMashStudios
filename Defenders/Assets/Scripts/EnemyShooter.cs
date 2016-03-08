@@ -31,6 +31,11 @@ public class EnemyShooter : MonoBehaviour {
             //Debug.Log("Player in range");
             inRange = true;
         }
+
+        if (col.gameObject.tag == "Bomb")
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void OnTriggerExit2D(Collider2D col)

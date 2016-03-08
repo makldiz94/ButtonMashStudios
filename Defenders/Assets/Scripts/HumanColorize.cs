@@ -5,10 +5,11 @@ public class HumanColorize : MonoBehaviour {
 
     public string col;
 
-    private string[] possibleColors = { "red", "blue", "yellow", "black"};
+    //red = lava, blue = ice, yellow = egg, green = gas, white = saturn 
+    private string[] possibleColors = { "red", "blue", "yellow", "green", "white"};
 
 	void Start () {
-        int rand = Random.Range(0, 4);
+        int rand = Random.Range(0, 5);
         col = possibleColors[rand];
         Color curColor = GetComponent<SpriteRenderer>().color;
         switch (col)
@@ -22,8 +23,11 @@ public class HumanColorize : MonoBehaviour {
             case "yellow":
                 curColor = Color.yellow;
                 break;
-            case "black":
-                curColor = Color.black;
+            case "green":
+                curColor = Color.green;
+                break;
+            case "white":
+                curColor = Color.white;
                 break;
         }
         GetComponent<SpriteRenderer>().color = curColor;

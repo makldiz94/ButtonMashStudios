@@ -1,12 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/*
+    Handles player
+        Input
+        Weapons
+        Cooldowns
+*/
 public class Shoot : MonoBehaviour {
 
-    public GameObject prefab;
+    public GameObject bulletPrefab;
+    public GameObject bombPrefab;
 
-	// Use this for initialization
-	void Start () {
+    private GameObject bomb;
+    private bool bombCD;
+    public int bombCDLength = 10;
+
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
@@ -15,7 +26,22 @@ public class Shoot : MonoBehaviour {
         if (Input.GetKeyDown("space"))
         {
             Debug.Log("Space pressed");
-            Instantiate(prefab, transform.position, Quaternion.identity);
+            Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         }
-	}
+
+        if (Input.GetKeyDown("g") && bombCD == false)
+        {
+            bombCD = true;
+            bomb = Instantiate(bombPrefab, this.transform.position, Quaternion.identity) as GameObject;
+            StartCoroutine(CoolDown());
+        }
+    }
+
+
+    IEnumerator CoolDown()
+    {
+        yield return new WaitForSeconds(bombCDLength);
+        bombCD = false;
+    }
+
 }
