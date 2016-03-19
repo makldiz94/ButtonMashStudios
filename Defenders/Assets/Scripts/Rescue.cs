@@ -24,7 +24,7 @@ public class Rescue : MonoBehaviour {
 
         if (hit.CompareTag("Human"))
         {
-            Debug.Log("Collided with human");
+            //Debug.Log("Collided with human");
 
             if (fullShip == true)
             {
@@ -90,7 +90,7 @@ public class Rescue : MonoBehaviour {
         }
         else
         {
-            Debug.Log("What the hell. " + hit.gameObject.name);
+            //Debug.Log("What the hell. " + hit.gameObject.name);
         }
 	}
 

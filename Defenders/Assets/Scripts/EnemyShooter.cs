@@ -51,7 +51,7 @@ public class EnemyShooter : MonoBehaviour {
     {
         if (!inRange)
         {
-            Debug.Log("Not in range");
+            //Debug.Log("Not in range");
             return;
         }
         else
