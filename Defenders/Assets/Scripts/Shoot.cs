@@ -39,7 +39,29 @@ public class Shoot : MonoBehaviour {
         {
             Vector3 newDirection = new Vector3(0,0, angleDirection - 90);
             transform.eulerAngles = newDirection;
-            Instantiate(bulletPrefab, transform.position, transform.rotation);
+            Vector3 pos = transform.position;
+            //Manipulate to shoot in 8 directions or 16 directions
+            if (angleDirection >= 45 && angleDirection <= 135)
+            {
+                Debug.Log("Shooting up");
+                pos.y += .7f;
+            }
+            if (angleDirection < 45 && angleDirection > -45)
+            {
+                Debug.Log("Shooting right");
+                pos.x += .6f;
+            }
+            if (angleDirection <= -45 && angleDirection >= -135)
+            {
+                Debug.Log("Shooting down");
+                pos.y -= .6f;
+            }
+            if (angleDirection > 135 || angleDirection < -135)
+            {
+                Debug.Log("Shooting left");
+                pos.x -= .7f;
+            }
+            Instantiate(bulletPrefab, pos, transform.rotation);
 
             canShoot = false;
             Invoke("ResetShoot", shootDelay);

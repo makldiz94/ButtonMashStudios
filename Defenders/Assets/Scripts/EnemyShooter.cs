@@ -12,7 +12,7 @@ public class EnemyShooter : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        InvokeRepeating("Shoot", 1f, 3f);
+        InvokeRepeating("Shoot", 1f, .5f);
 	}
 	
 	// Update is called once per frame
@@ -22,10 +22,7 @@ public class EnemyShooter : MonoBehaviour {
         euler.z = Mathf.Atan2(look.y, look.x) * Mathf.Rad2Deg - 90;
         transform.eulerAngles = euler;
     }
-
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        //Debug.Log("Enter hapened");
+    void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.tag == "Player")
         {
             //Debug.Log("Player in range");
@@ -37,26 +34,22 @@ public class EnemyShooter : MonoBehaviour {
             Destroy(this.gameObject);
         }
     }
-
-    void OnTriggerExit2D(Collider2D col)
-    {
+    void OnTriggerExit2D(Collider2D col){
         if (col.gameObject.tag == "Player")
         {
             //Debug.Log("Player out of range");
             inRange = false;
         }
     }
-
-    private void Shoot()
-    {
+    private void Shoot() {
         if (!inRange)
         {
-            //Debug.Log("Not in range");
             return;
         }
         else
         {
             Debug.Log("In range, I shot");
+            
             GameObject shot = Instantiate(bulletPrefab, transform.position, Quaternion.identity) as GameObject;
             shot.transform.eulerAngles = this.transform.eulerAngles;
         }
