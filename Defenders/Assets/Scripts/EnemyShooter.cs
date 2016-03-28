@@ -22,18 +22,30 @@ public class EnemyShooter : MonoBehaviour {
         euler.z = Mathf.Atan2(look.y, look.x) * Mathf.Rad2Deg - 90;
         transform.eulerAngles = euler;
     }
-    void OnTriggerEnter2D(Collider2D col){
+
+    void OnCollisionEnter2D (Collision2D col)
+    {
+        if (col.gameObject.tag == "Sun")
+        {
+            Debug.Log("Sun Hit");
+            Destroy(this.gameObject);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
         if(col.gameObject.tag == "Player")
         {
             //Debug.Log("Player in range");
             inRange = true;
         }
-
+        
         if (col.gameObject.tag == "Bomb")
         {
             Destroy(this.gameObject);
         }
     }
+
     void OnTriggerExit2D(Collider2D col){
         if (col.gameObject.tag == "Player")
         {
@@ -47,9 +59,7 @@ public class EnemyShooter : MonoBehaviour {
             return;
         }
         else
-        {
-            Debug.Log("In range, I shot");
-            
+        {            
             GameObject shot = Instantiate(bulletPrefab, transform.position, Quaternion.identity) as GameObject;
             shot.transform.eulerAngles = this.transform.eulerAngles;
         }

@@ -21,8 +21,9 @@ public class Shoot : MonoBehaviour {
 
     public string horizontalAxis = "ShootX";
     public string verticalAxis = "ShootY";
-    
 
+    public float rotSpeed;
+    public GameObject gun;
 
     // Use this for initialization
     void Start () {
@@ -37,31 +38,11 @@ public class Shoot : MonoBehaviour {
         float angleDirection = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
         if (canShoot && shootDirection.sqrMagnitude > 0.0f)
         {
-            Vector3 newDirection = new Vector3(0,0, angleDirection - 90);
+            Vector3 newDirection = Vector3.zero;
+            newDirection.z = Mathf.LerpAngle(transform.eulerAngles.z, angleDirection-90, rotSpeed * Time.deltaTime);
             transform.eulerAngles = newDirection;
-            Vector3 pos = transform.position;
-            //Manipulate to shoot in 8 directions or 16 directions
-            if (angleDirection >= 45 && angleDirection <= 135)
-            {
-                Debug.Log("Shooting up");
-                pos.y += .7f;
-            }
-            if (angleDirection < 45 && angleDirection > -45)
-            {
-                Debug.Log("Shooting right");
-                pos.x += .6f;
-            }
-            if (angleDirection <= -45 && angleDirection >= -135)
-            {
-                Debug.Log("Shooting down");
-                pos.y -= .6f;
-            }
-            if (angleDirection > 135 || angleDirection < -135)
-            {
-                Debug.Log("Shooting left");
-                pos.x -= .7f;
-            }
-            Instantiate(bulletPrefab, pos, transform.rotation);
+           
+            Instantiate(bulletPrefab, gun.transform.position, transform.rotation);
 
             canShoot = false;
             Invoke("ResetShoot", shootDelay);

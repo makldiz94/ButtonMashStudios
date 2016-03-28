@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour {
 
@@ -8,8 +9,10 @@ public class Enemy : MonoBehaviour {
     public int health;
     public float speed;
     public GameObject target;
-
+    public GameObject scorePrefab;
     public bool chasing;
+
+    private int points = 100;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +21,11 @@ public class Enemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //Vector3 dist = transform.position - target.transform.position;        
+    }
+
+    void LateUpdate()
+    {
         if (chasing)
         {
             euler = transform.eulerAngles;
@@ -26,10 +34,6 @@ public class Enemy : MonoBehaviour {
             euler.z = Mathf.Atan2(look.y, look.x) * Mathf.Rad2Deg - 90;
             transform.eulerAngles = euler;
         }
-        else
-        {
-            //Patrolling
-        }
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -37,18 +41,24 @@ public class Enemy : MonoBehaviour {
         if (col.gameObject.tag == "Bullet" || col.gameObject.tag == "Bomb")
         {
             Debug.Log("Enemy destroyed by player");
-            Destroy(gameObject);
+            OnDeath();
         }
 
         if (col.gameObject.tag == "Planet")
         {
             Debug.Log("Enemy destroyed by planet");
-            Destroy(gameObject);
+            OnDeath();
         }
 
         if(col.gameObject.tag == "Player")
         {
             chasing = true;
+        }
+
+        if (col.gameObject.tag == "Sun")
+        {
+            Debug.Log("Sun Hit");
+            OnDeath();
         }
     }
 
@@ -61,7 +71,7 @@ public class Enemy : MonoBehaviour {
 
         if(col.gameObject.tag == "Bomb")
         {
-            Destroy(this.gameObject);
+            OnDeath();
         }
     }
 
@@ -71,5 +81,13 @@ public class Enemy : MonoBehaviour {
         {
             chasing = false;
         }
+    }
+
+    public void OnDeath()
+    {
+        //GameObject scoreShow = Instantiate(scorePrefab, this.transform.position, Quaternion.identity) as GameObject;
+        //scoreShow.transform.parent = GameObject.Find("Canvas2").transform;
+        //scoreShow.GetComponent<Text>().text = "" + points;
+        Destroy(this.gameObject);      
     }
 }

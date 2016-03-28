@@ -4,14 +4,20 @@ using System.Collections;
 public class Bullet : MonoBehaviour {
 
     public float speed;
+    private GameObject bulletHolder;
+
+    void Awake()
+    {
+        bulletHolder = GameObject.FindGameObjectWithTag("BulletHold");
+    }
 
 	// Use this for initialization
 	void Start () {
-        Destroy(gameObject, 5f);
+        transform.parent = bulletHolder.transform;
+        Destroy(gameObject, 3f);
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    void Update () {
         Vector3 move = transform.up;
         move *= Time.deltaTime * speed;
         transform.Translate(move, Space.World);
