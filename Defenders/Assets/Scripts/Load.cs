@@ -20,4 +20,5 @@ public class Load : MonoBehaviour {
             Application.Quit();
         }
 	}
+   
 }
