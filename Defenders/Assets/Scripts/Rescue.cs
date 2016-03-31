@@ -15,11 +15,28 @@ public class Rescue : MonoBehaviour {
 	private int SaturnCounter = 0;
 	private int GasCounter = 0;
 
+	//Audio
+	private AudioSource[] allAudioSources;
+	private AudioSource alienSource;
+	private AudioSource fullshipSource;
+	private AudioSource dropoffSource;
+	public AudioClip fullship;
+	public AudioClip pickupalien;
+	public AudioClip dropoff;
+
     public Text scoreText;
 	
     //bools start off false
 	public bool fullShip;
-	
+
+	void Start (){
+		//AudioSource Array
+		AudioSource[] allAudioSources = GetComponents<AudioSource>();
+		alienSource = allAudioSources [0];
+		fullshipSource = allAudioSources [1];
+		dropoffSource = allAudioSources [2];
+	}
+
 	void OnTriggerEnter2D(Collider2D hit){
 
         if (hit.CompareTag("Human"))
@@ -28,10 +45,16 @@ public class Rescue : MonoBehaviour {
 
             if (fullShip == true)
             {
+				//full ship Audio
+				fullshipSource.clip = fullship;
+				fullshipSource.Play ();
                 return;
             }
             else
             {
+				//Pick Up Audio
+				alienSource.clip = pickupalien;
+				alienSource.Play ();
                 switch (hit.gameObject.GetComponent<HumanColorize>().col)
                 {
                     case "blue":
@@ -61,7 +84,8 @@ public class Rescue : MonoBehaviour {
         else if (hit.CompareTag("Planet"))
         {
             Debug.Log("collided with planet");
-
+			dropoffSource.clip = dropoff;
+			dropoffSource.Play ();
             switch (hit.gameObject.name)
             {
 

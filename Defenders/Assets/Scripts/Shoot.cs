@@ -12,6 +12,13 @@ public class Shoot : MonoBehaviour {
     public GameObject bulletPrefab;
     public GameObject bombPrefab;
     private GameObject bomb;
+		
+	//Audio
+	private AudioSource[] allAudioSources;
+	private AudioSource shootSource;
+	private AudioSource bombSource;
+	public AudioClip pshoot;
+	public AudioClip pbomb;
 
     public bool canShoot = true;
     private bool bombCD;
@@ -28,6 +35,16 @@ public class Shoot : MonoBehaviour {
     // Use this for initialization
     void Start () {
         canShoot = true;
+
+		//AudioSource Array
+		AudioSource[] allAudioSources = GetComponents<AudioSource>();
+		shootSource = allAudioSources [0];
+		bombSource = allAudioSources [1];
+
+	}
+
+	void Awake () {
+		//shootSource = GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
@@ -43,7 +60,12 @@ public class Shoot : MonoBehaviour {
             transform.eulerAngles = newDirection;
            
             Instantiate(bulletPrefab, gun.transform.position, transform.rotation);
+			//shoot.isReadyToPlay;
+			//audio.clip = shoot;
 
+			//Shoot Audio
+			shootSource.clip = pshoot;
+			shootSource.Play ();
             canShoot = false;
             Invoke("ResetShoot", shootDelay);
         }
@@ -52,6 +74,11 @@ public class Shoot : MonoBehaviour {
         {
             bombCD = true;
             bomb = Instantiate(bombPrefab, this.transform.position, Quaternion.identity) as GameObject;
+
+			//Bomb Audio
+			bombSource.clip = pbomb;
+			bombSource.Play ();
+
             StartCoroutine(CoolDown());
         }
     }
