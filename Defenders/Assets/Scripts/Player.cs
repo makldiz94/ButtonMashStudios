@@ -19,11 +19,17 @@ public class Player : MonoBehaviour {
     public string horizontalAxis = "Horizontal";
     public string verticalAxis = "Vertical";
 
-
     public bool untouchable;
+
+	//Player Death Audio
+	public AudioClip damaged;
+	private AudioSource damagedSource;
+
 
 	void Start () {
         curHealth = startHealth;
+		AudioSource[] allAudioSources = GetComponents<AudioSource>();
+		damagedSource = allAudioSources [6];
 	}
 	
 	void FixedUpdate () {
@@ -47,6 +53,8 @@ public class Player : MonoBehaviour {
         if(col.gameObject.tag == "Planet")
         {
             Debug.Log("You hit planet " + col.gameObject.name);
+			damagedSource.clip = damaged;
+			damagedSource.Play ();
         }
     }
 
@@ -84,13 +92,19 @@ public class Player : MonoBehaviour {
 
     private IEnumerator invincible()
     {
+		//Damaged audio
+		damagedSource.clip = damaged;
+		damagedSource.Play ();
+
         untouchable = true;
         Color col = GetComponent<SpriteRenderer>().color;
         col.a = .5f;
         GetComponent<SpriteRenderer>().color = col;
+
         yield return new WaitForSeconds(2f);
         col.a = 1f;
         GetComponent<SpriteRenderer>().color = col;
         untouchable = false;
+
     }
 }

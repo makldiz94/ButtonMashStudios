@@ -10,10 +10,15 @@ public class Portal : MonoBehaviour {
 	public int RangeNum;
 
 
+	//Portal Audio
+	public AudioClip portal;
+	private AudioSource portalSource;
+
+
 	// Use this for initialization
 	void Start () {
-		
-	
+		AudioSource[] allAudioSources = GetComponents<AudioSource>();
+		portalSource = allAudioSources [4];
 	}
 	
 	// Update is called once per frame
@@ -24,6 +29,7 @@ public class Portal : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D hit){
 		if (hit.CompareTag ("Portal")) {
 			if (canTele) {
+
 				int rand = Random.Range(0, RangeNum);
 				//Pick an exit
 				currentExit = possibleExits[rand];
@@ -40,6 +46,10 @@ public class Portal : MonoBehaviour {
 				//Go to the picked exit's location
 				trans = currentExit.transform;
 				transform.position = trans.position;
+
+				//Full ship audio
+				portalSource.clip = portal;
+				portalSource.Play ();
 				canTele = false;
 
 				//Invoke ("ResetTele", teleCooldown);

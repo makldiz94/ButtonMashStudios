@@ -14,9 +14,15 @@ public class Enemy : MonoBehaviour {
 
     private int points = 100;
 
+	//Enemy Audio
+	public AudioClip enemy;
+	private AudioSource enemySource;
+
 	// Use this for initialization
 	void Start () {
         target = GameObject.FindGameObjectWithTag("Player");
+		AudioSource[] allAudioSources = GetComponents<AudioSource>();
+		enemySource = allAudioSources [0];
 	}
 	
 	// Update is called once per frame
@@ -39,9 +45,10 @@ public class Enemy : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Bullet" || col.gameObject.tag == "Bomb")
-        {
+		{	
             Debug.Log("Enemy destroyed by player");
-            OnDeath();
+			StartCoroutine (OnDeath ());
+            //OnDeath();
         }
 
         if (col.gameObject.tag == "Planet")
@@ -61,6 +68,18 @@ public class Enemy : MonoBehaviour {
             OnDeath();
         }
     }
+
+	IEnumerator OnDeath()
+	{
+		//Play enemy death sound and then destroy
+		enemySource.clip = enemy;
+		enemySource.Play ();
+		chasing = false;
+
+		yield return new WaitForSeconds(.5f);
+
+		Destroy(this.gameObject); 
+	} 
 
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -83,11 +102,11 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    public void OnDeath()
+    /*public void OnDeath()
     {
         //GameObject scoreShow = Instantiate(scorePrefab, this.transform.position, Quaternion.identity) as GameObject;
         //scoreShow.transform.parent = GameObject.Find("Canvas2").transform;
         //scoreShow.GetComponent<Text>().text = "" + points;
         Destroy(this.gameObject);      
-    }
+    }*/
 }

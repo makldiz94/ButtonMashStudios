@@ -9,6 +9,9 @@ public class WorldEdge : MonoBehaviour {
 	private Shoot shoot;
 	private Transform pform;
 
+	//WorldEdge Audio
+	public AudioClip bounds;
+	private AudioSource boundsSource;
 
 	// Use this for initialization
 	void Start () {
@@ -16,6 +19,9 @@ public class WorldEdge : MonoBehaviour {
 		pform = player.GetComponent<Transform> ();
 		pscript = player.GetComponent<Player>();
 		shoot = player.GetComponent<Shoot>();
+
+		AudioSource[] allAudioSources = GetComponents<AudioSource>();
+		boundsSource = allAudioSources [6];
 	}
 	
 	// Update is called once per frame
@@ -24,6 +30,8 @@ public class WorldEdge : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
+		boundsSource.clip = bounds;
+		boundsSource.Play ();
 		if (coll.gameObject.tag == "Right") {
 			//Debug.Log ("Player hit wall at " + pbody.velocity);
 			//Debug.Log(pform.x);

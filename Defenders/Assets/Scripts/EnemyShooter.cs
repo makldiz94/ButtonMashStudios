@@ -9,10 +9,20 @@ public class EnemyShooter : MonoBehaviour {
     public bool inRange;
     public GameObject bulletPrefab;
 
+	//Enemy Shooter Audio
+	public AudioClip shooterdeath;
+	private AudioSource shooterdeathSource;
+	public AudioClip shooterfire;
+	private AudioSource shooterfireSource;
+
 	// Use this for initialization
 	void Start () {
         target = GameObject.FindGameObjectWithTag("Player").transform;
         InvokeRepeating("Shoot", 1f, .5f);
+		//ShooterAudio
+		AudioSource[] allAudioSources = GetComponents<AudioSource>();
+		shooterdeathSource = allAudioSources [0];
+		shooterfireSource = allAudioSources [1];
 	}
 	
 	// Update is called once per frame
@@ -28,7 +38,8 @@ public class EnemyShooter : MonoBehaviour {
         if (col.gameObject.tag == "Sun")
         {
             Debug.Log("Sun Hit");
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
+			StartCoroutine (OnDeath ());
         }
     }
 
@@ -42,7 +53,8 @@ public class EnemyShooter : MonoBehaviour {
         
         if (col.gameObject.tag == "Bomb")
         {
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
+			StartCoroutine (OnDeath ());
         }
     }
 
@@ -62,6 +74,21 @@ public class EnemyShooter : MonoBehaviour {
         {            
             GameObject shot = Instantiate(bulletPrefab, transform.position, Quaternion.identity) as GameObject;
             shot.transform.eulerAngles = this.transform.eulerAngles;
+			shooterfireSource.clip = shooterfire;
+			shooterfireSource.Play ();
         }
     }
+
+	IEnumerator OnDeath()
+	{
+		//Play enemy death sound and then destroy
+		shooterdeathSource.clip = shooterdeath;
+		shooterdeathSource.Play ();
+		inRange = false;
+
+		yield return new WaitForSeconds(1.5f);
+
+		Destroy(this.gameObject); 
+	} 
+
 }
