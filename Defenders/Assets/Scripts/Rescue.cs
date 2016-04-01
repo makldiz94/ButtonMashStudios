@@ -14,9 +14,12 @@ public class Rescue : MonoBehaviour {
 	private int EggCounter = 0;
 	private int SaturnCounter = 0;
 	private int GasCounter = 0;
+    public int curHumanCount;
+    public GameObject[] humanHold;
+    public bool fullShip;
 
-	//Audio
-	private AudioSource[] allAudioSources;
+    [Header("Audio")]
+    private AudioSource[] allAudioSources;
 	private AudioSource alienSource;
 	private AudioSource fullshipSource;
 	private AudioSource dropoffSource;
@@ -27,7 +30,7 @@ public class Rescue : MonoBehaviour {
     public Text scoreText;
 	
     //bools start off false
-	public bool fullShip;
+	
 
 	void Start (){
 		//AudioSource Array
@@ -59,23 +62,34 @@ public class Rescue : MonoBehaviour {
                 {
                     case "blue":
                         IceCounter++;
+                        humanHold[curHumanCount].SetActive(true);
+                        humanHold[curHumanCount].GetComponent<SpriteRenderer>().color = Color.blue;
                         break;
                     case "red":
                         LavaCounter++;
+                        humanHold[curHumanCount].SetActive(true);
+                        humanHold[curHumanCount].GetComponent<SpriteRenderer>().color = Color.red;
                         break;
                     case "green":
                         GasCounter++;
+                        humanHold[curHumanCount].SetActive(true);
+                        humanHold[curHumanCount].GetComponent<SpriteRenderer>().color = Color.green;
                         break;
                     case "white":
                         SaturnCounter++;
+                        humanHold[curHumanCount].SetActive(true);
+                        humanHold[curHumanCount].GetComponent<SpriteRenderer>().color = Color.white;
                         break;
                     case "yellow":
                         EggCounter++;
+                        humanHold[curHumanCount].SetActive(true);
+                        humanHold[curHumanCount].GetComponent<SpriteRenderer>().color = Color.yellow;
                         break;
                 }
                 Destroy(hit.gameObject);
             }
-            if (LavaCounter + GasCounter + SaturnCounter + EggCounter + IceCounter >= 3)
+            curHumanCount = LavaCounter + GasCounter + SaturnCounter + EggCounter + IceCounter;
+            if (curHumanCount >= 5)
             {
                 fullShip = true;
             }            
@@ -83,34 +97,44 @@ public class Rescue : MonoBehaviour {
 
         else if (hit.CompareTag("Planet"))
         {
-            Debug.Log("collided with planet");
-			dropoffSource.clip = dropoff;
-			dropoffSource.Play ();
-            switch (hit.gameObject.name)
+            //Debug.Log("collided with planet");
+            if (curHumanCount > 0)
             {
+                switch (hit.gameObject.name)
+                {
+                    case "IcePlanet":
+                        addScore(IceCounter);
+                        break;
+                    case "LavaPlanet":
+                        addScore(LavaCounter);
+                        break;
+                    case "GasPlanet":
+                        addScore(GasCounter);
+                        break;
+                    case "SaturnPlanet":
+                        addScore(SaturnCounter);
+                        break;
+                    case "EggPlanet":
+                        addScore(EggCounter);
+                        break;
+                }
+                IceCounter = 0;
+                LavaCounter = 0;
+                GasCounter = 0;
+                SaturnCounter = 0;
+                EggCounter = 0;
+                fullShip = false;
+                for(int i = 0; i < curHumanCount; i++)
+                {
+                    humanHold[i].SetActive(false);
+                }
+                curHumanCount = 0;
 
-                case "IcePlanet":
-                    addScore(IceCounter);
-                    break;
-                case "LavaPlanet":
-                    addScore(LavaCounter);
-                    break;
-                case "GasPlanet":
-                    addScore(GasCounter);
-                    break;
-                case "SaturnPlanet":
-                    addScore(SaturnCounter);
-                    break;
-                case "EggPlanet":
-                    addScore(EggCounter);
-                    break;
+
+
+                dropoffSource.clip = dropoff;
+                dropoffSource.Play();
             }
-            IceCounter = 0;
-            LavaCounter = 0;
-            GasCounter = 0;
-            SaturnCounter = 0;
-            EggCounter = 0;
-            fullShip = false;
         }
         else
         {

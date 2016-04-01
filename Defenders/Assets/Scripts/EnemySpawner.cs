@@ -1,13 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemySpawner : MonoBehaviour {
 
     public int enemyCount;
     public GameObject[] enemyPrefabs;
 
-    public int enemySpawnRate;
+    private List<GameObject> enemiesLimit;
 
+    public float enemySpawnRate;
+
+    public int ramp;
+
+    void Awake()
+    {
+        ramp = 10;
+    }
     void Start()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -22,6 +31,15 @@ public class EnemySpawner : MonoBehaviour {
         }
     }
 
+    void FixedUpdate()
+    {
+        if(Time.time > ramp)
+        {
+            ramp += 30;
+            enemyCount++;
+        }
+    }
+
     void SpawnEnemy()
     {
         for (int i = 0; i < enemyCount; i++)
@@ -29,9 +47,8 @@ public class EnemySpawner : MonoBehaviour {
             Vector3 rand = Random.insideUnitCircle;
             rand.x = 5 * rand.x + (Mathf.Sign(rand.x) * 4);
             rand.y = 5 * rand.y + (Mathf.Sign(rand.y) * 4);
-            int which = Random.Range(0, 2);
-            GameObject enemy = Instantiate(enemyPrefabs[which], transform.position, Quaternion.identity) as GameObject;
-            enemy.transform.position += rand;
-        }
+            int which = Random.Range(0, 10);
+            GameObject enemy = Instantiate(enemyPrefabs[which], transform.position + rand, Quaternion.identity) as GameObject;
+        }       
     }
 }

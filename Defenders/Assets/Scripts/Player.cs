@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-
 /*
     Handles player
         movement
@@ -12,7 +11,7 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour {
     
     public float speed = 1.0f;
-    private int startHealth = 10;
+    private int startHealth = 5;
     public int curHealth;
     private Transform child;
 
@@ -37,7 +36,7 @@ public class Player : MonoBehaviour {
 
         if(curHealth < 1)
         {
-            //SceneManager.LoadScene(2);
+            SceneManager.LoadScene(2);
         }
     }
 
@@ -53,40 +52,32 @@ public class Player : MonoBehaviour {
         if(col.gameObject.tag == "Planet")
         {
             Debug.Log("You hit planet " + col.gameObject.name);
-			damagedSource.clip = damaged;
-			damagedSource.Play ();
+			//damagedSource.clip = damaged;
+			//damagedSource.Play ();
         }
     }
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (!untouchable)
-        {
-            if (col.gameObject.tag == "Enemy")
-            {
-                TakeDamage(1);
-            }
-
-            if (col.gameObject.tag == "Enemy2")
-            {
-                TakeDamage(2);
-            }
-        }
+        
     }
 
-    void TakeDamage(int enemyType)
+    public void TakeDamage(int enemyType)
     {
-        StartCoroutine(invincible());
-        switch (enemyType)
+        if (!untouchable)
         {
-            case 1:
-                Debug.Log("Case 1 ran, enemy hit player");
-                curHealth--;
-                break;
-            case 2:
-                Debug.Log("Case 2 ran, enemy hit player");
-                curHealth -= 2;
-                break;
+            StartCoroutine(invincible());
+            switch (enemyType)
+            {
+                case 1:
+                    Debug.Log("Case 1 ran, enemy hit player");
+                    curHealth--;
+                    break;
+                case 2:
+                    Debug.Log("Case 2 ran, enemy hit player");
+                    curHealth -= 2;
+                    break;
+            }
         }
     }
 
@@ -98,13 +89,14 @@ public class Player : MonoBehaviour {
 
         untouchable = true;
         Color col = GetComponent<SpriteRenderer>().color;
-        col.a = .5f;
+        col.g = .5f;
+        col.b = .5f;
         GetComponent<SpriteRenderer>().color = col;
 
         yield return new WaitForSeconds(2f);
-        col.a = 1f;
+        col.g = 1f;
+        col.b = 1f;
         GetComponent<SpriteRenderer>().color = col;
         untouchable = false;
-
     }
 }

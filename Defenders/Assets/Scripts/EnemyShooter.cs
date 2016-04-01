@@ -3,6 +3,7 @@ using System.Collections;
 
 public class EnemyShooter : MonoBehaviour {
 
+    public int speed;
     private Vector3 euler;
     private Vector3 look;
     private Transform target;
@@ -26,11 +27,16 @@ public class EnemyShooter : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         euler = transform.eulerAngles;
         look = target.transform.position - this.transform.position;
         euler.z = Mathf.Atan2(look.y, look.x) * Mathf.Rad2Deg - 90;
         transform.eulerAngles = euler;
+
+        if (!inRange)
+        {
+            this.transform.position += look.normalized * speed * Time.deltaTime;
+        }
     }
 
     void OnCollisionEnter2D (Collision2D col)
@@ -90,5 +96,4 @@ public class EnemyShooter : MonoBehaviour {
 
 		Destroy(this.gameObject); 
 	} 
-
 }

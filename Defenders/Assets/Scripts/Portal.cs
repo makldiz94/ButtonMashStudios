@@ -2,13 +2,11 @@
 using System.Collections;
 
 public class Portal : MonoBehaviour {
-	public GameObject[] possibleExits;
-	public bool canTele;
-	public int teleCooldown;
-	private Transform trans;
-	private GameObject currentExit;
-	public int RangeNum;
 
+    public GameObject[] possibleExits;
+	public bool canTele;
+	public float teleCooldown;
+    private Vector3 newPos;
 
 	//Portal Audio
 	public AudioClip portal;
@@ -19,6 +17,7 @@ public class Portal : MonoBehaviour {
 	void Start () {
 		AudioSource[] allAudioSources = GetComponents<AudioSource>();
 		portalSource = allAudioSources [4];
+        canTele = true;
 	}
 	
 	// Update is called once per frame
@@ -26,49 +25,42 @@ public class Portal : MonoBehaviour {
 	
 	}
 
-	void OnTriggerEnter2D(Collider2D hit){
-		if (hit.CompareTag ("Portal")) {
-			if (canTele) {
-
-				int rand = Random.Range(0, RangeNum);
-				//Pick an exit
-				currentExit = possibleExits[rand];
-
-				//Don't teleport to the same portal you entered through
-				/*if (currentExit.transform.position == hit.transform.position) {
-					System.Collections.Generic.List<GameObject> list = new System.Collections.Generic.List<GameObject> (possibleExits);
-					list.Remove (currentExit);
-					possibleExits = list.ToArray ();
-				}*/
-					
-					//possibleExits.RemoveAt (1);
-			
-				//Go to the picked exit's location
-				trans = currentExit.transform;
-				transform.position = trans.position;
-
+	void OnTriggerEnter2D(Collider2D hit)
+    {
+		if (hit.CompareTag ("Portal"))
+        {
+			if (canTele)
+            {
+                canTele = false;
+                if(hit.gameObject.name == "PortalTL")
+                {
+                    newPos = possibleExits[3].transform.position;
+                }
+                if (hit.gameObject.name == "PortalTR")
+                {
+                    newPos = possibleExits[2].transform.position;
+                }
+                if (hit.gameObject.name == "PortalBL")
+                {
+                    newPos = possibleExits[1].transform.position;
+                }
+                if (hit.gameObject.name == "PortalBR")
+                {
+                    newPos = possibleExits[0].transform.position;
+                }
+                Debug.Log("teled");
+                transform.position = newPos;
 				//Full ship audio
 				portalSource.clip = portal;
 				portalSource.Play ();
-				canTele = false;
 
-				//Invoke ("ResetTele", teleCooldown);
+				Invoke ("ResetTele", teleCooldown);
 			}
-	
 		}
 	}
 
-	void OnTriggerExit2D(Collider2D hit){
-		if (hit.CompareTag ("Portal")) {
-			canTele = true;
-			}
-
-		}
-
-
-
-
-	/*void ResetTele(){
-		canTele = true;
-	}*/
+    public void ResetTele()
+    {
+        canTele = true;
+    }
 }

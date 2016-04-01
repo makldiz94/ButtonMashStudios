@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour {
 
     private int points = 100;
 
+    public GameObject[] explosions;
+
 	//Enemy Audio
 	public AudioClip enemy;
 	private AudioSource enemySource;
@@ -23,14 +25,10 @@ public class Enemy : MonoBehaviour {
         target = GameObject.FindGameObjectWithTag("Player");
 		AudioSource[] allAudioSources = GetComponents<AudioSource>();
 		enemySource = allAudioSources [0];
+        chasing = true;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        //Vector3 dist = transform.position - target.transform.position;        
-    }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         if (chasing)
         {
@@ -50,18 +48,21 @@ public class Enemy : MonoBehaviour {
 			StartCoroutine (OnDeath ());
             //OnDeath();
         }
-
-        if (col.gameObject.tag == "Planet")
+        if (col.gameObject.tag == "Sun")
         {
-            Debug.Log("Enemy destroyed by planet");
+            Debug.Log("Sun Hit");
             OnDeath();
         }
-
         if(col.gameObject.tag == "Player")
         {
-            chasing = true;
+            Debug.Log("Touched Player");
+            target.GetComponent<Player>().TakeDamage(1);
+            OnDeath();
         }
+    }
 
+    void OnCollisionStay2D(Collision2D col)
+    {
         if (col.gameObject.tag == "Sun")
         {
             Debug.Log("Sun Hit");
@@ -71,37 +72,18 @@ public class Enemy : MonoBehaviour {
 
 	IEnumerator OnDeath()
 	{
-		//Play enemy death sound and then destroy
-		enemySource.clip = enemy;
+        GetComponent<BoxCollider2D>().enabled = false;
+        GameObject explosion1 = Instantiate(explosions[Random.Range(0, 3)], transform.position, Quaternion.identity) as GameObject;
+        GameObject explosion2 = Instantiate(explosions[Random.Range(0, 3)], transform.position, Quaternion.identity) as GameObject;
+        Destroy(explosion1, 1f);
+        Destroy(explosion2, 1f);
+        //Play enemy death sound and then destroy
+        enemySource.clip = enemy;
 		enemySource.Play ();
 		chasing = false;
-
-		yield return new WaitForSeconds(.5f);
-
-		Destroy(this.gameObject); 
+		yield return new WaitForSeconds(.5f);       
+        Destroy(this.gameObject); 
 	} 
-
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if(col.gameObject.tag == "Player")
-        {
-            chasing = true;
-        }
-
-        if(col.gameObject.tag == "Bomb")
-        {
-            OnDeath();
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.gameObject.tag == "Player")
-        {
-            chasing = false;
-        }
-    }
-
     /*public void OnDeath()
     {
         //GameObject scoreShow = Instantiate(scorePrefab, this.transform.position, Quaternion.identity) as GameObject;
