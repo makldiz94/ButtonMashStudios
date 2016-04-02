@@ -4,7 +4,6 @@ using System.Collections;
 public class GameOver : MonoBehaviour
 {
 
-    public Texture backgroundTexture;
   
     public Texture forgroundTexture;
 
@@ -21,9 +20,7 @@ public class GameOver : MonoBehaviour
 
 
     void OnGUI()
-    {
-        GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), backgroundTexture);
-       
+    {       
         GUI.DrawTexture(new Rect(Screen.width * logoPlacementX, Screen.height * logoPlacementY, Screen.width - 800, Screen.height - 400), forgroundTexture);
 
         if (GUI.Button(new Rect(Screen.width * guiPlacementX1, Screen.height * guiPlacementY1, Screen.width * .5F, Screen.height * .1F), "Play Again!!"))

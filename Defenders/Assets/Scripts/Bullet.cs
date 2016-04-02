@@ -29,5 +29,10 @@ public class Bullet : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+
+        if(col.gameObject.tag == "Planet")
+        {
+            Destroy(gameObject);
+        }
     }
 }

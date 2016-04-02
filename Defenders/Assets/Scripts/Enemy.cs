@@ -46,16 +46,18 @@ public class Enemy : MonoBehaviour {
 		{	
             Debug.Log("Enemy destroyed by player");
 			StartCoroutine (OnDeath ());
+            target.GetComponent<Rescue>().addScoreEnemy(50);
             //OnDeath();
         }
         if (col.gameObject.tag == "Sun")
         {
-            Debug.Log("Sun Hit");
+            //Debug.Log("Sun Hit");
+            Destroy(this.gameObject);
             OnDeath();
         }
         if(col.gameObject.tag == "Player")
         {
-            Debug.Log("Touched Player");
+            //Debug.Log("Touched Player");
             target.GetComponent<Player>().TakeDamage(1);
             OnDeath();
         }
@@ -65,7 +67,7 @@ public class Enemy : MonoBehaviour {
     {
         if (col.gameObject.tag == "Sun")
         {
-            Debug.Log("Sun Hit");
+            //Debug.Log("Sun Hit");
             OnDeath();
         }
     }

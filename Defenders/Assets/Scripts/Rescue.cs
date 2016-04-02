@@ -1,12 +1,16 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 //Counts up collected humans
 //Adds score based on drop-off planet
 //Planets tagged planet, "Color" attribute comes in Lava, Ice, Egg, Saturn, and Gas
 
 
 public class Rescue : MonoBehaviour {
+
+    public Text remainingText;
+    public int remainingHumans = 30;
 
     public int playerScore;
 	private int LavaCounter = 0;
@@ -30,18 +34,26 @@ public class Rescue : MonoBehaviour {
     public Text scoreText;
 	
     //bools start off false
-	
 
 	void Start (){
 		//AudioSource Array
 		AudioSource[] allAudioSources = GetComponents<AudioSource>();
-		alienSource = allAudioSources [0];
-		fullshipSource = allAudioSources [1];
-		dropoffSource = allAudioSources [2];
+		alienSource = allAudioSources [9];
+		fullshipSource = allAudioSources [10];
+		dropoffSource = allAudioSources [11];
 	}
 
-	void OnTriggerEnter2D(Collider2D hit){
+    void Update()
+    {
+        if(remainingHumans == 0)
+        {
+            Debug.Log("GG");
+            SceneManager.LoadScene("Win");
+        }
+    }
 
+	void OnTriggerEnter2D(Collider2D hit)
+    {
         if (hit.CompareTag("Human"))
         {
             //Debug.Log("Collided with human");
@@ -126,7 +138,7 @@ public class Rescue : MonoBehaviour {
                 fullShip = false;
                 for(int i = 0; i < curHumanCount; i++)
                 {
-                    humanHold[i].SetActive(false);
+                    humanHold[i].SetActive(false);  
                 }
                 curHumanCount = 0;
 
@@ -146,9 +158,22 @@ public class Rescue : MonoBehaviour {
 	{
 		int totalHumans = IceCounter + LavaCounter + GasCounter + EggCounter + SaturnCounter;
 		//Calculate and add points. 10*# of non-matching + 100*matching
-		playerScore += ((totalHumans - num) * 10) + (num * 100);
+		playerScore += ((totalHumans - num) * 10) + (num * 500);
         SetScore();
+        remainingHumans -= totalHumans;
+        SubtractScore();
 	}
+
+    public void addScoreEnemy(int num)
+    {
+        playerScore += num;
+        SetScore();
+    }
+
+    void SubtractScore()
+    {
+        remainingText.text = "Remaining Humans: " + remainingHumans.ToString() + " of 30";
+    }
 
     void SetScore()
     {

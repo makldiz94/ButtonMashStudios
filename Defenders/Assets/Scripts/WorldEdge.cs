@@ -30,8 +30,6 @@ public class WorldEdge : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
-		boundsSource.clip = bounds;
-		boundsSource.Play ();
 		if (coll.gameObject.tag == "Right") {
 			//Debug.Log ("Player hit wall at " + pbody.velocity);
 			//Debug.Log(pform.x);
@@ -41,37 +39,50 @@ public class WorldEdge : MonoBehaviour {
 		else if (coll.gameObject.tag == "Left") {
 
 			StartCoroutine (LeftWait ());
+            Sound();
 		}
 		else if (coll.gameObject.tag == "Top") {
 
 			StartCoroutine (TopWait ());
-		}
+            Sound();
+        }
 		else if (coll.gameObject.tag == "Bottom") {
 
 			StartCoroutine (BottomWait ());
-		}
+            Sound();
+        }
 		else if (coll.gameObject.tag == "TL") {
 
 			StartCoroutine (TLWait ());
-		}
+            Sound();
+        }
 		else if (coll.gameObject.tag == "TR") {
 
 			StartCoroutine (TRWait ());
-		}
+            Sound();
+        }
 		else if (coll.gameObject.tag == "BL") {
 
 			StartCoroutine (BLWait ());
-		}
+            Sound();
+        }
 		else if (coll.gameObject.tag == "BR") {
 
 			StartCoroutine (BRWait ());
-		}
+            Sound();
+        }
 		/*elseif (coll.gameObject.tag == "Bottom"){
 			
 		}
 		else if (coll.gameObject.tag == "Top"){
 		}*/
 	}
+
+    public void Sound()
+    {
+        boundsSource.clip = bounds;
+        boundsSource.Play();
+    }
 
 	IEnumerator RightWait()
 	{

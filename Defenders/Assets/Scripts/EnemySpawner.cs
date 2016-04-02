@@ -22,7 +22,7 @@ public class EnemySpawner : MonoBehaviour {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if(transform.parent == player.transform)
         {
-            Debug.Log("Player is parent");
+            //Debug.Log("Player is parent");
             InvokeRepeating("SpawnEnemy", 5f, enemySpawnRate);
         }
         else
@@ -42,13 +42,17 @@ public class EnemySpawner : MonoBehaviour {
 
     void SpawnEnemy()
     {
-        for (int i = 0; i < enemyCount; i++)
+        GameObject[] enemyCounter = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemyCounter.Length < 100)
         {
-            Vector3 rand = Random.insideUnitCircle;
-            rand.x = 5 * rand.x + (Mathf.Sign(rand.x) * 4);
-            rand.y = 5 * rand.y + (Mathf.Sign(rand.y) * 4);
-            int which = Random.Range(0, 10);
-            GameObject enemy = Instantiate(enemyPrefabs[which], transform.position + rand, Quaternion.identity) as GameObject;
-        }       
+            for (int i = 0; i < enemyCount; i++)
+            {
+                Vector3 rand = Random.insideUnitCircle;
+                rand.x = 5 * rand.x + (Mathf.Sign(rand.x) * 4);
+                rand.y = 5 * rand.y + (Mathf.Sign(rand.y) * 4);
+                int which = Random.Range(0, 10);
+                GameObject enemy = Instantiate(enemyPrefabs[which], transform.position + rand, Quaternion.identity) as GameObject;
+            }
+        }
     }
 }

@@ -26,8 +26,8 @@ public class Shoot : MonoBehaviour {
     public float bombCDLength = 10;
     public float shootDelay = .1f;
 
-    public string horizontalAxis = "ShootX";
-    public string verticalAxis = "ShootY";
+    public string horizontalAxis = "Horizontal";
+    public string verticalAxis = "Vertical";
 
     public float rotSpeed;
     public GameObject gun;
