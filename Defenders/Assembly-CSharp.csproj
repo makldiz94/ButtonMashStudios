@@ -45,23 +45,39 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Bob.cs" />
+     <Compile Include="Assets\Glow.cs" />
+     <Compile Include="Assets\MenuScripts\JoystickButton.cs" />
+     <Compile Include="Assets\MenuScripts\JoystickButtonMenu.cs" />
+     <Compile Include="Assets\MenuScripts\NewMainMenu.cs" />
+     <Compile Include="Assets\Rotate.cs" />
      <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
+     <Compile Include="Assets\Scripts\Controls.cs" />
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\EnemyShooter.cs" />
      <Compile Include="Assets\Scripts\EnemySpawner.cs" />
+     <Compile Include="Assets\Scripts\GameOver.cs" />
+     <Compile Include="Assets\Scripts\GameOverGrow.cs" />
      <Compile Include="Assets\Scripts\Grow.cs" />
      <Compile Include="Assets\Scripts\Human.cs" />
      <Compile Include="Assets\Scripts\HumanColorize.cs" />
      <Compile Include="Assets\Scripts\HumanSpawner.cs" />
      <Compile Include="Assets\Scripts\Load.cs" />
+     <Compile Include="Assets\Scripts\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\NavigateGO.cs" />
+     <Compile Include="Assets\Scripts\NavigateStart.cs" />
      <Compile Include="Assets\Scripts\Pickup.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
+     <Compile Include="Assets\Scripts\Portal.cs" />
      <Compile Include="Assets\Scripts\Rescue.cs" />
      <Compile Include="Assets\Scripts\SceneManage.cs" />
      <Compile Include="Assets\Scripts\Shoot.cs" />
      <Compile Include="Assets\Scripts\WorldEdge.cs" />
+     <Compile Include="Assets\Scripts\controlsScript.cs" />
      <Compile Include="Assets\Scripts\expand.cs" />
+     <None Include="Assets\Ultra Emissive Particles Shader\Shaders\ParticleEmmissive.shader" />
+     <None Include="Assets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
