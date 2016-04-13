@@ -34,6 +34,7 @@ public class WorldEdge : MonoBehaviour {
 			//Debug.Log ("Player hit wall at " + pbody.velocity);
 			//Debug.Log(pform.x);
 			StartCoroutine (RightWait ());
+			Sound();
 			//Debug.Log ("Player velocity is: " + pbody.velocity);
 		} 
 		else if (coll.gameObject.tag == "Left") {
