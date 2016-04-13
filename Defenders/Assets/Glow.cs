@@ -11,37 +11,15 @@ public class Glow : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		col = GetComponent<SpriteRenderer> ().color;
-		Debug.Log (col.a);
 		StartCoroutine (Fade ());
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-		/*if (!rising) {
-			if (col.a == glower) {
-				rising = true;
-			}
-			col.a -= Mathf.Lerp (col.a, glower, Time.deltaTime * speed);
-			Debug.Log (col.a);
-			GetComponent<SpriteRenderer> ().color = col;
-		}
-		else {
-			if (col.a == 1) {
-				rising = false;
-			}
-			col.a += Mathf.Lerp (glower, 1, Time.deltaTime * speed);
-			GetComponent<SpriteRenderer> ().color = col;
-		}*/
-	}
-
 	IEnumerator Fade(){
 		for (int i = 0; i < glower; i++) {
 			col.a -= .01f; 
 			GetComponent<SpriteRenderer> ().color = col;
 			yield return new WaitForSeconds (.01f);
 		}
-
 		StartCoroutine (Brighten ());
 	}
 
@@ -51,7 +29,6 @@ public class Glow : MonoBehaviour {
 			GetComponent<SpriteRenderer> ().color = col;
 			yield return new WaitForSeconds (.01f);
 		}
-
 		StartCoroutine (Fade ());
 	}
 }

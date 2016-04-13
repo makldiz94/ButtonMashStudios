@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour {
 
     void Awake()
     {
-        ramp = 10;
+        
     }
     void Start()
     {
@@ -50,7 +50,7 @@ public class EnemySpawner : MonoBehaviour {
                 Vector3 rand = Random.insideUnitCircle;
                 rand.x = 5 * rand.x + (Mathf.Sign(rand.x) * 4);
                 rand.y = 5 * rand.y + (Mathf.Sign(rand.y) * 4);
-                int which = Random.Range(0, 10);
+                int which = Random.Range(0, enemyPrefabs.Length);
                 GameObject enemy = Instantiate(enemyPrefabs[which], transform.position + rand, Quaternion.identity) as GameObject;
             }
         }

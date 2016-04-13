@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if (chasing)
+        if (chasing && target != null)
         {
             euler = transform.eulerAngles;
             look = target.transform.position - this.transform.position;
@@ -43,23 +43,19 @@ public class Enemy : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Bullet" || col.gameObject.tag == "Bomb")
-		{	
-            Debug.Log("Enemy destroyed by player");
+		{
+            Destroy(col.gameObject);
 			StartCoroutine (OnDeath ());
             target.GetComponent<Rescue>().addScoreEnemy(50);
-            //OnDeath();
         }
         if (col.gameObject.tag == "Sun")
         {
-            //Debug.Log("Sun Hit");
             Destroy(this.gameObject);
-            OnDeath();
         }
         if(col.gameObject.tag == "Player")
         {
-            //Debug.Log("Touched Player");
             target.GetComponent<Player>().TakeDamage(1);
-            OnDeath();
+            StartCoroutine(OnDeath());
         }
     }
 
@@ -67,16 +63,15 @@ public class Enemy : MonoBehaviour {
     {
         if (col.gameObject.tag == "Sun")
         {
-            //Debug.Log("Sun Hit");
-            OnDeath();
+            StartCoroutine(OnDeath());
         }
     }
 
 	IEnumerator OnDeath()
 	{
         GetComponent<BoxCollider2D>().enabled = false;
-        GameObject explosion1 = Instantiate(explosions[Random.Range(0, 3)], transform.position, Quaternion.identity) as GameObject;
-        GameObject explosion2 = Instantiate(explosions[Random.Range(0, 3)], transform.position, Quaternion.identity) as GameObject;
+        GameObject explosion1 = Instantiate(explosions[Random.Range(0, explosions.Length)], transform.position, Quaternion.identity) as GameObject;
+        GameObject explosion2 = Instantiate(explosions[Random.Range(0, explosions.Length)], transform.position, Quaternion.identity) as GameObject;
         Destroy(explosion1, 1f);
         Destroy(explosion2, 1f);
         //Play enemy death sound and then destroy
@@ -86,11 +81,4 @@ public class Enemy : MonoBehaviour {
 		yield return new WaitForSeconds(.5f);       
         Destroy(this.gameObject); 
 	} 
-    /*public void OnDeath()
-    {
-        //GameObject scoreShow = Instantiate(scorePrefab, this.transform.position, Quaternion.identity) as GameObject;
-        //scoreShow.transform.parent = GameObject.Find("Canvas2").transform;
-        //scoreShow.GetComponent<Text>().text = "" + points;
-        Destroy(this.gameObject);      
-    }*/
 }

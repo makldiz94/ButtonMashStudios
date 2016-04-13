@@ -26,8 +26,8 @@ public class Shoot : MonoBehaviour {
     public float bombCDLength = 10;
     public float shootDelay = .1f;
 
-    public string horizontalAxis = "Horizontal";
-    public string verticalAxis = "Vertical";
+    public string horizontalAxis = "ShootX";
+    public string verticalAxis = "ShootY";
 
     public float rotSpeed;
     public GameObject gun;
@@ -53,15 +53,13 @@ public class Shoot : MonoBehaviour {
         //Vector3 shootDirection = Vector3.forward * Input.GetAxis(horizontalAxis) + Vector3.back * Input.GetAxis(verticalAxis);
         Vector2 shootDirection = new Vector2(Input.GetAxis(horizontalAxis), Input.GetAxis(verticalAxis)).normalized;
         float angleDirection = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
-        if (canShoot && shootDirection.sqrMagnitude > 0.0f)
+        if (canShoot && shootDirection.sqrMagnitude > 0.1f)
         {
             Vector3 newDirection = Vector3.zero;
             newDirection.z = Mathf.LerpAngle(transform.eulerAngles.z, angleDirection-90, rotSpeed * Time.deltaTime);
             transform.eulerAngles = newDirection;
-           
+
             Instantiate(bulletPrefab, gun.transform.position, transform.rotation);
-			//shoot.isReadyToPlay;
-			//audio.clip = shoot;
 
 			//Shoot Audio
 			shootSource.clip = pshoot;
@@ -69,7 +67,7 @@ public class Shoot : MonoBehaviour {
             canShoot = false;
             Invoke("ResetShoot", shootDelay);
         }
-        
+        /*
         if (Input.GetKeyDown("g") && bombCD == false)
         {
             bombCD = true;
@@ -80,7 +78,7 @@ public class Shoot : MonoBehaviour {
 			bombSource.Play ();
 
             StartCoroutine(CoolDown());
-        }
+        }*/
     }
 
     void ResetShoot()

@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour {
     public float speed;
     private GameObject bulletHolder;
 
+    public GameObject explosion;
+
     void Awake()
     {
         bulletHolder = GameObject.FindGameObjectWithTag("BulletHold");
@@ -26,13 +28,20 @@ public class Bullet : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D col)
     {
         if(col.gameObject.tag == "Enemy")
-        {
+        {            
             Destroy(gameObject);
         }
 
         if(col.gameObject.tag == "Planet")
         {
+            Debug.Log("Hit planet");
             Destroy(gameObject);
         }
+    }
+
+    void OnDestroy()
+    {
+        GameObject boom = Instantiate(explosion, transform.position, Quaternion.identity) as GameObject;
+        Destroy(boom, 2f);
     }
 }

@@ -8,7 +8,10 @@ public class EnemyShooter : MonoBehaviour {
     private Vector3 look;
     private Transform target;
     public bool inRange;
+    public bool chasing;
     public GameObject bulletPrefab;
+
+    public GameObject[] explosions;
 
 	//Enemy Shooter Audio
 	public AudioClip shooterdeath;
@@ -24,19 +27,23 @@ public class EnemyShooter : MonoBehaviour {
 		AudioSource[] allAudioSources = GetComponents<AudioSource>();
 		shooterdeathSource = allAudioSources [0];
 		shooterfireSource = allAudioSources [1];
+        chasing = true;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        euler = transform.eulerAngles;
-        look = target.transform.position - this.transform.position;
-        euler.z = Mathf.Atan2(look.y, look.x) * Mathf.Rad2Deg - 90;
-        transform.eulerAngles = euler;
-
-        if (!inRange)
+        if (chasing && target != null)
         {
-            this.transform.position += look.normalized * speed * Time.deltaTime;
-        }
+            euler = transform.eulerAngles;
+            look = target.transform.position - this.transform.position;
+            euler.z = Mathf.Atan2(look.y, look.x) * Mathf.Rad2Deg - 90;
+            transform.eulerAngles = euler;
+
+            if (!inRange)
+            {
+                this.transform.position += look.normalized * speed * Time.deltaTime;
+            }
+        }        
     }
 
     void OnCollisionEnter2D (Collision2D col)
@@ -50,8 +57,9 @@ public class EnemyShooter : MonoBehaviour {
 
         if(col.gameObject.tag == "Bullet")
         {
+            Destroy(col.gameObject);
             target.GetComponent<Rescue>().addScoreEnemy(100);
-            Destroy(this.gameObject);
+            StartCoroutine(OnDeath());
         }
     }
 
@@ -60,8 +68,7 @@ public class EnemyShooter : MonoBehaviour {
         if (col.gameObject.tag == "Sun")
         {
             Debug.Log("Sun Hit");
-            Destroy(this.gameObject);
-            StartCoroutine(OnDeath());
+            Death();
         }
     }
         void OnTriggerEnter2D(Collider2D col)
@@ -77,6 +84,11 @@ public class EnemyShooter : MonoBehaviour {
             //Destroy(this.gameObject);
 			StartCoroutine (OnDeath ());
         }
+    }
+
+    void Death()
+    {
+        Destroy(this.gameObject);
     }
 
     void OnTriggerExit2D(Collider2D col){
@@ -102,13 +114,23 @@ public class EnemyShooter : MonoBehaviour {
 
 	IEnumerator OnDeath()
 	{
-		//Play enemy death sound and then destroy
-		shooterdeathSource.clip = shooterdeath;
+        chasing = false;
+        //Play enemy death sound and then destroy
+        GetComponent<CircleCollider2D>().enabled = false;
+        shooterdeathSource.clip = shooterdeath;
 		shooterdeathSource.Play ();
 		inRange = false;
-
-		yield return new WaitForSeconds(1.5f);
-
-		Destroy(this.gameObject); 
+        GameObject explosion1 = Instantiate(explosions[Random.Range(0, explosions.Length)], transform.position, Quaternion.identity) as GameObject;
+        GameObject explosion2 = Instantiate(explosions[Random.Range(0, explosions.Length)], transform.position, Quaternion.identity) as GameObject;
+        GameObject explosion3 = Instantiate(explosions[Random.Range(0, explosions.Length)], transform.position, Quaternion.identity) as GameObject;
+        GameObject explosion4 = Instantiate(explosions[Random.Range(0, explosions.Length)], transform.position, Quaternion.identity) as GameObject;
+        Destroy(explosion1, 2f);
+        Destroy(explosion2, 2f);
+        Destroy(explosion3, 2f);
+        Destroy(explosion4, 2f);
+        yield return new WaitForSeconds(.5f);
+        this.GetComponent<SpriteRenderer>().enabled = false;
+        yield return new WaitForSeconds(.5f);
+        Destroy(this.gameObject); 
 	} 
 }

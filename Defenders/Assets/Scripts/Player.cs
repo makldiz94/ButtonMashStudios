@@ -10,17 +10,23 @@ using UnityEngine.UI;
         stats
 */
 public class Player : MonoBehaviour {
-    
-    public float speed = 1.0f;
-    private int startHealth = 25;
+
+    public float speed;
+    public float startingSpeed = 5f;
+    public int startHealth = 25;
     public int curHealth;
     private Transform child;
 
     public Slider hp;
-    public string horizontalAxis = "ShootX";
-    public string verticalAxis = "ShootY";
+    public string horizontalAxis = "Horizontal";
+    public string verticalAxis = "Vertical";
 
     public bool untouchable;
+    public bool dead;
+
+    public GameObject bug;
+
+    public GameObject[] explosions;
 
 	//Player Death Audio
 	public AudioClip damaged;
@@ -31,14 +37,18 @@ public class Player : MonoBehaviour {
         curHealth = startHealth;
 		AudioSource[] allAudioSources = GetComponents<AudioSource>();
 		damagedSource = allAudioSources [3];
+        speed = startingSpeed;
 	}
 	
 	void FixedUpdate () {
-        move();
-
-        if(curHealth < 1)
+        if (!dead)
         {
-            SceneManager.LoadScene("GameOver");
+            move();
+        }
+
+        if (curHealth < 1)
+        {
+            dead = true;          
         }
 
         if (Input.GetKeyDown("3"))
@@ -46,13 +56,12 @@ public class Player : MonoBehaviour {
             Debug.Log("Quit");
             Application.Quit();
         }
+
     }
 
     void move()
     {
-
         transform.position += (Vector3.right * Input.GetAxis(horizontalAxis) + Vector3.up * Input.GetAxis(verticalAxis)).normalized * Time.deltaTime * speed;
-
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -64,28 +73,36 @@ public class Player : MonoBehaviour {
         }
         if(col.gameObject.tag == "BulletEnemy")
         {
-            //Debug.Log("Shooter hit player");
-            TakeDamage(2);
+            TakeDamage(1);
         }
     }
 
-    public void TakeDamage(int enemyType)
+    public void Bug()
+    {
+        if (bug.activeInHierarchy)
+        {
+            speed /= 2;
+        }
+        Invoke("Squash", 5f);
+    }
+
+    void Squash()
+    {
+        bug.SetActive(false);
+        speed = startingSpeed;
+        TakeDamage(3);
+    }
+
+    public void TakeDamage(int damage)
     {
         if (!untouchable)
         {
             StartCoroutine(invincible());
-            switch (enemyType)
+            curHealth -= damage;
+            hp.value = curHealth;
+            if(curHealth <= 0)
             {
-                case 1:
-                    Debug.Log("Case 1 ran, enemy hit player");
-                    curHealth--;
-                    hp.value = curHealth;
-                    break;
-                case 2:
-                    Debug.Log("Case 2 ran, enemy hit player");
-                    curHealth -= 2;
-                    hp.value = curHealth;
-                    break;
+                Die();
             }
         }
     }
@@ -108,5 +125,19 @@ public class Player : MonoBehaviour {
         col.b = 1f;
         GetComponent<SpriteRenderer>().color = col;
         untouchable = false;
+    }
+
+    void Die()
+    {
+        Instantiate(explosions[0], transform.position, Quaternion.identity);
+        Instantiate(explosions[1], transform.position, Quaternion.identity);
+        Instantiate(explosions[2], transform.position, Quaternion.identity);
+        Instantiate(explosions[3], transform.position, Quaternion.identity);
+        Invoke("LoseScene", 2);
+    }
+
+    void LoseScene()
+    {
+        SceneManager.LoadScene("GameOver");
     }
 }
