@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour {
         Destroy(gameObject, 3f);
 	}
 
-    void Update () {
+    void FixedUpdate () {
         Vector3 move = transform.up;
         move *= Time.deltaTime * speed;
         transform.Translate(move, Space.World);
@@ -34,7 +34,7 @@ public class Bullet : MonoBehaviour {
 
         if(col.gameObject.tag == "Planet")
         {
-            Debug.Log("Hit planet");
+            //Debug.Log("Hit planet");
             Destroy(gameObject);
         }
     }

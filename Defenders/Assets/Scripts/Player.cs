@@ -21,6 +21,8 @@ public class Player : MonoBehaviour {
     public string horizontalAxis = "Horizontal";
     public string verticalAxis = "Vertical";
 
+    public GameObject control;
+
     public bool untouchable;
     public bool dead;
 
@@ -38,8 +40,9 @@ public class Player : MonoBehaviour {
 		AudioSource[] allAudioSources = GetComponents<AudioSource>();
 		damagedSource = allAudioSources [3];
         speed = startingSpeed;
+        Invoke("TurnOffControl", 5f);
 	}
-	
+
 	void FixedUpdate () {
         if (!dead)
         {
@@ -74,6 +77,7 @@ public class Player : MonoBehaviour {
         if(col.gameObject.tag == "BulletEnemy")
         {
             TakeDamage(1);
+            Destroy(col.gameObject);
         }
     }
 
@@ -125,6 +129,11 @@ public class Player : MonoBehaviour {
         col.b = 1f;
         GetComponent<SpriteRenderer>().color = col;
         untouchable = false;
+    }
+
+    void TurnOffControl()
+    {
+        control.SetActive(false);
     }
 
     void Die()
