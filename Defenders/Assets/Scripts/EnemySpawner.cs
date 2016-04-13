@@ -19,16 +19,8 @@ public class EnemySpawner : MonoBehaviour {
     }
     void Start()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if(transform.parent == player.transform)
-        {
-            //Debug.Log("Player is parent");
+
             InvokeRepeating("SpawnEnemy", 5f, enemySpawnRate);
-        }
-        else
-        {
-            SpawnEnemy();
-        }
     }
 
     void FixedUpdate()
