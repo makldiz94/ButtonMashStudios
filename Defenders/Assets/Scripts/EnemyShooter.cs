@@ -22,7 +22,7 @@ public class EnemyShooter : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        InvokeRepeating("Shoot", 1f, .5f);
+        InvokeRepeating("Shoot", 1f, 1f);
 		//ShooterAudio
 		AudioSource[] allAudioSources = GetComponents<AudioSource>();
 		shooterdeathSource = allAudioSources [0];
