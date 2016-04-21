@@ -1,0 +1,203 @@
+fileFormatVersion: 2
+guid: 2049dd132ae207d4caa35bea382f4be6
+timeCreated: 1461181568
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Bullet-04_0
+    21300002: Bullet-04_1
+    21300004: Bullet-04_2
+    21300006: Bullet-04_3
+    21300008: Bullet-04_4
+    21300010: Bullet-04_5
+    21300012: Bullet-04_6
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Bullet-04_0
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 14
+        width: 501
+        height: 502
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 38.932076, y: 54.432076}
+        - {x: -38.067924, y: 54.432076}
+        - {x: -52.067924, y: 33.432076}
+        - {x: -52.067924, y: -38.567924}
+        - {x: -25.067924, y: -52.567924}
+        - {x: 32.932076, y: -52.567924}
+        - {x: 36.932076, y: -49.567924}
+        - {x: 53.932076, y: -27.567924}
+        - {x: 53.932076, y: 44.432076}
+    - name: Bullet-04_1
+      rect:
+        serializedVersion: 2
+        x: 753
+        y: 43
+        width: 487
+        height: 449
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -30.796234, y: 47.50566}
+        - {x: -34.796234, y: 46.50566}
+        - {x: -50.796234, y: 21.505661}
+        - {x: -50.796234, y: -15.494339}
+        - {x: -42.796234, y: -32.49434}
+        - {x: -23.796234, y: -47.49434}
+        - {x: 36.203766, y: -47.49434}
+        - {x: 52.203766, y: -37.49434}
+        - {x: 52.203766, y: 30.505661}
+        - {x: 44.203766, y: 47.50566}
+    - name: Bullet-04_2
+      rect:
+        serializedVersion: 2
+        x: 1497
+        y: 67
+        width: 472
+        height: 396
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -26.477356, y: 41.532074}
+        - {x: -48.477356, y: 22.532074}
+        - {x: -49.477356, y: 16.532074}
+        - {x: -49.477356, y: -19.467926}
+        - {x: -41.477356, y: -41.467926}
+        - {x: 48.522644, y: -41.467926}
+        - {x: 50.522644, y: -36.467926}
+        - {x: 50.522644, y: 29.532074}
+        - {x: 38.522644, y: 41.532074}
+    - name: Bullet-04_3
+      rect:
+        serializedVersion: 2
+        x: 2236
+        y: 96
+        width: 458
+        height: 338
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -38.205658, y: 35.60566}
+        - {x: -45.205658, y: 34.60566}
+        - {x: -48.205658, y: 19.60566}
+        - {x: -48.205658, y: -21.39434}
+        - {x: -42.205658, y: -31.39434}
+        - {x: -25.205658, y: -35.39434}
+        - {x: 36.794342, y: -35.39434}
+        - {x: 48.794342, y: -19.39434}
+        - {x: 48.794342, y: 18.60566}
+        - {x: 30.794342, y: 35.60566}
+    - name: Bullet-04_4
+      rect:
+        serializedVersion: 2
+        x: 2980
+        y: 124
+        width: 439
+        height: 287
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -39.38678, y: 31.96981}
+        - {x: -46.38678, y: 16.96981}
+        - {x: -46.38678, y: -23.03019}
+        - {x: -40.38678, y: -30.03019}
+        - {x: 38.61322, y: -30.03019}
+        - {x: 46.61322, y: -29.03019}
+        - {x: 46.61322, y: 31.96981}
+    - name: Bullet-04_5
+      rect:
+        serializedVersion: 2
+        x: 3719
+        y: 148
+        width: 430
+        height: 234
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -26.615112, y: 26.496225}
+        - {x: -44.615112, y: 18.496225}
+        - {x: -44.615112, y: -16.503775}
+        - {x: -37.615112, y: -24.503775}
+        - {x: 45.384888, y: -24.503775}
+        - {x: 46.384888, y: -20.503775}
+        - {x: 46.384888, y: 22.496225}
+        - {x: 40.384888, y: 26.496225}
+    - name: Bullet-04_6
+      rect:
+        serializedVersion: 2
+        x: 4463
+        y: 177
+        width: 410
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 39.203735, y: 18.569809}
+        - {x: -38.796265, y: 18.569809}
+        - {x: -42.796265, y: 10.569809}
+        - {x: -42.796265, y: -14.430191}
+        - {x: -37.796265, y: -18.430191}
+        - {x: 42.203735, y: -18.430191}
+        - {x: 44.203735, y: -15.430191}
+        - {x: 44.203735, y: 12.569809}
+        - {x: 43.203735, y: 17.569809}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour {
 
     public float enemySpawnRate;
 
-    public int ramp;
+    public float ramp;
 
     void Awake()
     {
@@ -19,15 +19,15 @@ public class EnemySpawner : MonoBehaviour {
     }
     void Start()
     {
-
-            InvokeRepeating("SpawnEnemy", 5f, enemySpawnRate);
+        ramp += Time.time;
+        InvokeRepeating("SpawnEnemy", 5f, enemySpawnRate);
     }
 
     void FixedUpdate()
     {
         if(Time.time > ramp)
         {
-            ramp += 30;
+            ramp += ramp;
             enemyCount++;
         }
     }

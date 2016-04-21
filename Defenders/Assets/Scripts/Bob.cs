@@ -11,7 +11,6 @@ public class Bob : MonoBehaviour
 
 	void Start()
 	{
-
 		originalY = this.transform.position.y;
 	}
 

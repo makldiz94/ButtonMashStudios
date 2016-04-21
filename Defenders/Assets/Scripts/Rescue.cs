@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class Rescue : MonoBehaviour {
 
+    public GameObject scorer;
     public Text remainingText;
     public int remainingHumans = 30;
 
@@ -45,7 +46,7 @@ public class Rescue : MonoBehaviour {
 
     void Update()
     {
-        if(remainingHumans == 0)
+        if (remainingHumans == 0 || Input.GetKeyDown("t"))
         {
             Debug.Log("GG");
             SceneManager.LoadScene("Win");
@@ -82,12 +83,12 @@ public class Rescue : MonoBehaviour {
                         humanHold[curHumanCount].SetActive(true);
                         humanHold[curHumanCount].GetComponent<SpriteRenderer>().color = Color.red;
                         break;
-                    case "green":
+                    case "brown":
                         GasCounter++;
                         humanHold[curHumanCount].SetActive(true);
                         humanHold[curHumanCount].GetComponent<SpriteRenderer>().color = Color.green;
                         break;
-                    case "white":
+                    case "green":
                         SaturnCounter++;
                         humanHold[curHumanCount].SetActive(true);
                         humanHold[curHumanCount].GetComponent<SpriteRenderer>().color = Color.white;
@@ -141,9 +142,6 @@ public class Rescue : MonoBehaviour {
                     humanHold[i].SetActive(false);  
                 }
                 curHumanCount = 0;
-
-
-
                 dropoffSource.clip = dropoff;
                 dropoffSource.Play();
             }
@@ -178,5 +176,6 @@ public class Rescue : MonoBehaviour {
     void SetScore()
     {
         scoreText.text = "" + playerScore.ToString();
+        scorer.GetComponent<Scoring>().score = playerScore;
     }
 }

@@ -27,6 +27,7 @@ public class Player : MonoBehaviour {
     public bool dead;
 
     public GameObject bug;
+    public GameObject sparks;
 
     public GameObject[] explosions;
 
@@ -79,6 +80,12 @@ public class Player : MonoBehaviour {
             TakeDamage(1);
             Destroy(col.gameObject);
         }
+
+        if(col.gameObject.tag == "Sun")
+        {
+            Debug.Log("Get Away!");
+            TakeDamage(2);
+        }
     }
 
     public void Bug()
@@ -87,6 +94,7 @@ public class Player : MonoBehaviour {
         {
             speed /= 2;
         }
+        sparks.SetActive(true);
         Invoke("Squash", 5f);
     }
 
@@ -95,6 +103,7 @@ public class Player : MonoBehaviour {
         bug.SetActive(false);
         speed = startingSpeed;
         TakeDamage(3);
+        sparks.SetActive(false);
     }
 
     public void TakeDamage(int damage)
@@ -102,8 +111,11 @@ public class Player : MonoBehaviour {
         if (!untouchable)
         {
             StartCoroutine(invincible());
+
             curHealth -= damage;
             hp.value = curHealth;
+            GameObject explo = Instantiate(explosions[4], transform.position, Quaternion.identity) as GameObject;
+            Destroy(explo, 1f);
             if(curHealth <= 0)
             {
                 Die();
@@ -138,6 +150,7 @@ public class Player : MonoBehaviour {
 
     void Die()
     {
+        Fader.s.sceneEnding = true;
         Instantiate(explosions[0], transform.position, Quaternion.identity);
         Instantiate(explosions[1], transform.position, Quaternion.identity);
         Instantiate(explosions[2], transform.position, Quaternion.identity);

@@ -51,6 +51,7 @@ public class Enemy : MonoBehaviour {
         if (col.gameObject.tag == "Sun")
         {
             Destroy(this.gameObject);
+            StartCoroutine(SunDeath());
         }
         if(col.gameObject.tag == "Player")
         {
@@ -80,5 +81,19 @@ public class Enemy : MonoBehaviour {
 		chasing = false;
 		yield return new WaitForSeconds(.5f);       
         Destroy(this.gameObject); 
-	} 
+	}
+
+    IEnumerator SunDeath()
+    {
+        GetComponent<BoxCollider2D>().enabled = false;
+        GameObject explosion1 = Instantiate(explosions[Random.Range(0, explosions.Length)], transform.position, Quaternion.identity) as GameObject;
+        GameObject explosion2 = Instantiate(explosions[Random.Range(0, explosions.Length)], transform.position, Quaternion.identity) as GameObject;
+        GameObject explosion3 = Instantiate(explosions[Random.Range(0, explosions.Length)], transform.position, Quaternion.identity) as GameObject;
+        Destroy(explosion1, 1f);
+        Destroy(explosion2, 1f);
+        Destroy(explosion3, 1f);
+        chasing = false;
+        yield return new WaitForSeconds(.5f);
+        Destroy(this.gameObject);
+    }
 }

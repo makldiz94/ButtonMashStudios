@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        if(col.gameObject.tag == "Planet")
+        if(col.gameObject.tag == "Planet" || col.gameObject.tag == "Sun")
         {
             //Debug.Log("Hit planet");
             Destroy(gameObject);
