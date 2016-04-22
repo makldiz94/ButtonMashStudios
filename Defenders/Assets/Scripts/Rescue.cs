@@ -86,12 +86,16 @@ public class Rescue : MonoBehaviour {
                     case "brown":
                         GasCounter++;
                         humanHold[curHumanCount].SetActive(true);
-                        humanHold[curHumanCount].GetComponent<SpriteRenderer>().color = Color.green;
+                        Color colo = Color.white;
+                        colo.r = 146f;
+                        colo.g = 102f;
+                        colo.b = 0f;
+                        humanHold[curHumanCount].GetComponent<SpriteRenderer>().color = colo;
                         break;
                     case "green":
                         SaturnCounter++;
                         humanHold[curHumanCount].SetActive(true);
-                        humanHold[curHumanCount].GetComponent<SpriteRenderer>().color = Color.white;
+                        humanHold[curHumanCount].GetComponent<SpriteRenderer>().color = Color.green;
                         break;
                     case "yellow":
                         EggCounter++;

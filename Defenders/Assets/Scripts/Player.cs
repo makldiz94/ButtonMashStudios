@@ -55,7 +55,7 @@ public class Player : MonoBehaviour {
             dead = true;          
         }
 
-        if (Input.GetKeyDown("3"))
+        if (Input.GetKeyDown("3") || Input.GetKeyDown("escape"))
         {
             Debug.Log("Quit");
             Application.Quit();

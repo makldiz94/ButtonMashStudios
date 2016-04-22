@@ -88,7 +88,7 @@ public class WorldEdge : MonoBehaviour {
 	IEnumerator RightWait()
 	{
 		//Disable player control and push them away from the edge of the wall for a certain amount of time
-		pbody.AddForce(-Vector2.right * 150);
+		pbody.AddForce(-Vector2.right * 300);
 		pform.rotation = Quaternion.Euler (0, 0, 90);
 		pscript.enabled = false;
 		shoot.enabled = false;
@@ -105,7 +105,7 @@ public class WorldEdge : MonoBehaviour {
 		//Disable player control and push them away from the edge of the wall for a certain amount of time
 		//Alternatively, move player towards origin for a set period of time vvv		
 		//transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), new Vector2(0,0), 3);
-		pbody.AddForce(Vector2.right * 150);
+		pbody.AddForce(Vector2.right * 300);
 		pform.rotation = Quaternion.Euler (0, 0, -90);
 		pscript.enabled = false;
 		shoot.enabled = false;
@@ -120,7 +120,7 @@ public class WorldEdge : MonoBehaviour {
 	IEnumerator TopWait()
 	{
 		//Disable player control and push them away from the edge of the wall for a certain amount of time
-		pbody.AddForce(Vector2.down * 150);
+		pbody.AddForce(Vector2.down * 300);
 		pform.rotation = Quaternion.Euler (0, 0, 180);
 		pscript.enabled = false;
 		shoot.enabled = false;
@@ -135,7 +135,7 @@ public class WorldEdge : MonoBehaviour {
 	IEnumerator BottomWait()
 	{
 		//Disable player control and push them away from the edge of the wall for a certain amount of time
-		pbody.AddForce(Vector2.up * 150);
+		pbody.AddForce(Vector2.up * 300);
 		pform.rotation = Quaternion.Euler (0, 0, 0);
 		pscript.enabled = false;
 		shoot.enabled = false;
@@ -149,7 +149,7 @@ public class WorldEdge : MonoBehaviour {
 	IEnumerator TLWait()
 	{
 		//Disable player control and push them away from the edge of the wall for a certain amount of time
-		pbody.AddForce((Vector2.down * 150)+(Vector2.right * 150));
+		pbody.AddForce((Vector2.down * 150)+(Vector2.right * 300));
 		pform.rotation = Quaternion.Euler (0, 0, 228);
 		pscript.enabled = false;
 		shoot.enabled = false;
@@ -163,7 +163,7 @@ public class WorldEdge : MonoBehaviour {
 	IEnumerator TRWait()
 	{
 		//Disable player control and push them away from the edge of the wall for a certain amount of time
-		pbody.AddForce((Vector2.down * 150)+(-Vector2.right * 150));
+		pbody.AddForce((Vector2.down * 150)+(-Vector2.right * 300));
 		pform.rotation = Quaternion.Euler (0, 0, 140);
 		pscript.enabled = false;
 		shoot.enabled = false;
@@ -177,7 +177,7 @@ public class WorldEdge : MonoBehaviour {
 	IEnumerator BLWait()
 	{
 		//Disable player control and push them away from the edge of the wall for a certain amount of time
-		pbody.AddForce((Vector2.up * 150)+(Vector2.right * 150));
+		pbody.AddForce((Vector2.up * 150)+(Vector2.right * 300));
 		pform.rotation = Quaternion.Euler (0, 0, 312);
 		pscript.enabled = false;
 		shoot.enabled = false;
@@ -191,7 +191,7 @@ public class WorldEdge : MonoBehaviour {
 	IEnumerator BRWait()
 	{
 		//Disable player control and push them away from the edge of the wall for a certain amount of time
-		pbody.AddForce((-Vector2.down * 150)+(-Vector2.right * 150));
+		pbody.AddForce((-Vector2.down * 150)+(-Vector2.right * 300));
 		pform.rotation = Quaternion.Euler (0, 0, 45);
 		pscript.enabled = false;
 		shoot.enabled = false;

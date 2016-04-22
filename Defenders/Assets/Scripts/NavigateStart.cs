@@ -11,12 +11,12 @@ public class NavigateStart : MonoBehaviour {
             Debug.Log("play");
             SceneManager.LoadScene("_Game");
         }
-        if (Input.GetKeyDown("2"))
+        /*if (Input.GetKeyDown("2"))
         {
             Debug.Log("Controls");
             SceneManager.LoadScene("Controls");
-        }
-        if (Input.GetKeyDown("3"))
+        }*/
+        if (Input.GetKeyDown("3") || Input.GetKeyDown("escape"))
         {
             Debug.Log("Quit");
             Application.Quit();
